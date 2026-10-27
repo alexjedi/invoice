@@ -97,7 +97,7 @@ export function Segmented<T extends string>({ value, options, onChange, classNam
           value={o.value}
           aria-label={o.title}
           title={o.title}
-          className="relative flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-md px-2 text-tx-2 transition-colors outline-none hover:text-tx data-pressed:text-tx"
+          className="relative flex flex-auto cursor-pointer items-center justify-center gap-1.5 rounded-md px-1.5 whitespace-nowrap text-tx-2 transition-colors outline-none hover:text-tx data-pressed:text-tx"
         >
           {value === o.value && (
             <motion.span
@@ -133,7 +133,7 @@ export function Select<T extends string>({ value, options, onChange, className }
         {current?.icon && <span className="text-tx-2">{current.icon}</span>}
         <BaseSelect.Value className="flex-1 truncate" />
         <BaseSelect.Icon className="text-tx-3">
-          <ChevronDownIcon size={12} />
+          <ChevronDownIcon size={14} />
         </BaseSelect.Icon>
       </BaseSelect.Trigger>
       <BaseSelect.Portal>
@@ -150,7 +150,7 @@ export function Select<T extends string>({ value, options, onChange, className }
                   <BaseSelect.ItemText className="flex-1">{o.label}</BaseSelect.ItemText>
                   {o.hint && <span className="text-tx-3">{o.hint}</span>}
                   <BaseSelect.ItemIndicator className="text-tx-2">
-                    <CheckIcon size={12} />
+                    <CheckIcon size={14} />
                   </BaseSelect.ItemIndicator>
                 </BaseSelect.Item>
               ))}

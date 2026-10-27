@@ -28,7 +28,7 @@ export function AgentDialog({ open, onOpenChange }: { open: boolean; onOpenChang
               <BotIcon size={14} /> Fill with an AI agent
             </Dialog.Title>
             <Dialog.Close className="-mt-1 -mr-1 flex size-7 cursor-pointer items-center justify-center rounded-lg text-tx-3 hover:bg-field-2 hover:text-tx">
-              <XIcon size={12} />
+              <XIcon size={14} />
             </Dialog.Close>
           </div>
           <Dialog.Description className="text-tx-2">
@@ -36,7 +36,7 @@ export function AgentDialog({ open, onOpenChange }: { open: boolean; onOpenChang
           </Dialog.Description>
           <pre className="tabular rounded-lg bg-field p-3 whitespace-pre-wrap text-tx select-text">{prompt}</pre>
           <Button variant="solid" onClick={copy}>
-            {copied ? <CheckIcon size={13} /> : <ClipboardIcon size={13} />}
+            {copied ? <CheckIcon size={14} /> : <ClipboardIcon size={14} />}
             {copied ? "Copied" : "Copy prompt"}
           </Button>
           <p className="text-xs text-tx-3">

@@ -1,5 +1,5 @@
 import { Tooltip } from "@base-ui/react/tooltip";
-import { BotIcon, RotateCcwIcon, SunMoonIcon, FileDownIcon, FileUpIcon } from "lucide-react";
+import { BotIcon, FileDownIcon, FileUpIcon, MoonIcon, RotateCcwIcon, SunIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { invoiceId } from "./state/format";
 import { getInvoice, isTouched, replaceInvoice, resetInvoice } from "./state/store";
@@ -71,9 +71,7 @@ function Toolbar() {
           <RotateCcwIcon size={14} />
         </IconButton>
         <span className="mx-1 h-4 w-px bg-field-2" />
-        <IconButton tip="Light / dark" onClick={toggleTheme}>
-          <SunMoonIcon size={14} />
-        </IconButton>
+        <ThemeButton />
         <IconButton tip="Source on GitHub" onClick={() => window.open("https://github.com/alexjedi/invoice", "_blank", "noopener")}>
           <IconGithub />
         </IconButton>
@@ -84,8 +82,14 @@ function Toolbar() {
   );
 }
 
-function toggleTheme() {
-  document.documentElement.classList.toggle("dark");
+function ThemeButton() {
+  const [dark, setDark] = useState(() => document.documentElement.classList.contains("dark"));
+  const toggle = () => setDark(document.documentElement.classList.toggle("dark"));
+  return (
+    <IconButton tip={dark ? "Light mode" : "Dark mode"} onClick={toggle}>
+      {dark ? <SunIcon size={14} /> : <MoonIcon size={14} />}
+    </IconButton>
+  );
 }
 
 function useShortcuts() {

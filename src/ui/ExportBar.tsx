@@ -28,7 +28,7 @@ export function ExportBar() {
         onClick={savePdf}
         className="flex h-9 cursor-pointer items-center gap-2 rounded-xl bg-tx px-3 text-bg transition-[opacity,scale] hover:opacity-90 active:scale-[0.98]"
       >
-        <ArrowDownIcon size={13} />
+        <ArrowDownIcon size={14} />
         <span className="text-[14px]">Save PDF</span>
         <span className="tabular ml-auto opacity-60">{id}</span>
       </button>
@@ -43,7 +43,7 @@ export function ExportBar() {
           >
             Start next invoice
             <span className="tabular ml-auto">#{number + 1}</span>
-            <ArrowRightIcon size={12} />
+            <ArrowRightIcon size={14} />
           </motion.button>
         )}
       </AnimatePresence>

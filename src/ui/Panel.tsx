@@ -112,7 +112,7 @@ function LogoField() {
         {logo ? (
           <img src={logo} alt="" className={cx("size-5 object-cover", shape === "round" ? "rounded-full" : "rounded")} />
         ) : (
-          <UploadIcon size={13} />
+          <UploadIcon size={14} />
         )}
         {logo ? "Replace" : "Logo or photo"}
       </button>
@@ -128,7 +128,7 @@ function LogoField() {
             ]}
           />
           <IconButton tip="Remove" onClick={() => patch({ logo: null })}>
-            <XIcon size={13} />
+            <XIcon size={14} />
           </IconButton>
         </>
       )}
@@ -145,7 +145,7 @@ function ItemsSection() {
       title="Items"
       action={
         <IconButton tip="Add item" className="-mr-1.5 size-6" onClick={addItem}>
-          <PlusIcon size={12} />
+          <PlusIcon size={14} />
         </IconButton>
       }
     >
@@ -162,7 +162,7 @@ function ItemsSection() {
             />
             {items.length > 1 && (
               <IconButton tip="Remove item" onClick={() => removeItem(i.id)}>
-                <TrashIcon size={13} />
+                <TrashIcon size={14} />
               </IconButton>
             )}
           </div>
