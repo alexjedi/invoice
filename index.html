@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice</title>
+    <meta name="description" content="Free, minimal invoice generator. No accounts, nothing is saved." />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" type="text/markdown" href="/llms.txt" title="Instructions for AI agents" />
+    <link rel="describedby" type="application/schema+json" href="/schema.json" />
+    <link rel="preload" href="/fonts/soehne-buch.woff2" as="font" type="font/woff2" crossorigin />
+  </head>
+  <body>
+    <div id="root"></div>
+    <section id="agents" aria-hidden="true">
+      <h1>Invoice generator — instructions for AI agents</h1>
+      <p>To fill an invoice for the user, build a link and give it to them; they open it, check it and click "Save PDF". Data goes in the URL hash (never sent to a server), URL-encoded, %0A for line breaks. Nothing is saved anywhere; the link is the whole invoice, so include every field you know. Don't invent personal data; ask for what's missing.</p>
+      <p>Example: https://invoice.alexvoid.com/#from.name=Jane%20Doe&amp;from.address=1%20Rue%20X%0A75001%20Paris&amp;to.name=Acme%20Inc&amp;to.address=123%20Main%20St%0ANew%20York&amp;item=Website%20design%7C80%7Chours%7C70&amp;currency=EUR&amp;tax=VAT%3A23&amp;terms=15</p>
+      <p>Keys: from.name, from.address, from.email, from.phone, from.tax (tax ID); to.name, to.address, to.email, to.tax; item=description|qty|unit|rate (repeat per line); currency (ISO code); tax=LABEL:RATE (percent); discount (percent); terms (days, 0 = on receipt); date (YYYY-MM-DD); prefix; number; status (pending|paid|draft); notes (payment details); display (code|symbol); locale; signature (0 hides).</p>
+      <p>Or #json=&lt;encodeURIComponent(JSON)&gt; matching https://invoice.alexvoid.com/schema.json. Full reference: https://invoice.alexvoid.com/llms.txt</p>
+    </section>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

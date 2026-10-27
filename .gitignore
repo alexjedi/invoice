@@ -1,0 +1,9 @@
+node_modules
+dist
+.wrangler
+.env
+.dev.vars
+.DS_Store
+*.log
+public/fonts/soehne-*
+public/fonts/lava-*

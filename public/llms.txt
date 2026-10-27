@@ -1,0 +1,43 @@
+# Invoice — invoice.alexvoid.com
+
+> Free invoice generator. Fill an invoice for someone by building a link; they open it, check it and click "Save PDF". No accounts, no API key, nothing is saved anywhere — the invoice lives only in the link's #hash and the open tab.
+
+## How to fill an invoice
+
+Build a URL of the form `https://invoice.alexvoid.com/#key=value&key=value…` and give it to the user. URL-encode values (`encodeURIComponent`); `+` or `%20` for spaces, `%0A` (or a literal `\n`) for line breaks in addresses and notes. Nothing is saved between visits, so the link is the whole invoice: include every field you know; keys you leave out stay empty or default. Don't invent personal data — ask the user for anything missing.
+
+Example:
+
+https://invoice.alexvoid.com/#from.name=Jane%20Doe&from.address=1%20Rue%20X%0A75001%20Paris%0AFrance&from.email=jane%40doe.com&to.name=Acme%20Inc&to.address=123%20Main%20St%0ANew%20York%2C%20NY%2010025%0AUnited%20States&item=Website%20design%7C80%7Chours%7C70&item=Hosting%7C1%7Cmonth%7C20&currency=EUR&tax=VAT%3A23&terms=15&number=21
+
+### Keys
+
+| Key | Value | Example |
+| --- | --- | --- |
+| `from.name`, `from.address`, `from.email`, `from.phone`, `from.tax` | Sender (the person invoicing). `tax` = tax ID | `from.name=Jane Doe` |
+| `to.name`, `to.address`, `to.email`, `to.tax` | Client being billed | `to.name=Acme Inc` |
+| `item` | `description\|qty\|unit\|rate` (rate = price per unit). Repeat for several lines; any `item` replaces all lines | `item=Design work\|80\|hours\|70` |
+| `currency` | ISO 4217 code | `EUR` |
+| `tax` | `LABEL:RATE` in percent, or just a rate or a label | `VAT:23`, `GST:10`, `0` |
+| `discount` | Percent, applied before tax | `10` |
+| `terms` | Days until due; `0` = due on receipt | `15` |
+| `date` | Invoice date `YYYY-MM-DD`; default today | `2026-03-03` |
+| `prefix`, `number` | Invoice id becomes `PREFIX-YEAR-NUMBER` | `prefix=INV&number=21` |
+| `year` | `0` drops the year from the id (`INV-21`) | `0` |
+| `status` | `pending`, `paid` or `draft` | `paid` |
+| `notes` | Payment details printed under the table (bank, IBAN, PayPal…) | `IBAN DE00 0000…` |
+| `display` | `code` (USD 1,234.50) or `symbol` ($1,234.50) | `symbol` |
+| `locale` | BCP 47 locale for number/date format | `de-DE` |
+| `signature` | `0` hides the typed signature | `0` |
+
+### Alternative: JSON
+
+`https://invoice.alexvoid.com/#json=<encodeURIComponent(JSON)>` with an object matching https://invoice.alexvoid.com/schema.json (the same format as the app's "Export setup"). Partial objects are fine; `from`/`to` are merged field by field.
+
+## Notes for agents
+
+- Source: https://github.com/alexjedi/invoice
+- The page is a client-side app; there is nothing to POST and no PDF endpoint. The user makes the PDF with the "Save PDF" button (the browser's print dialog → "Save as PDF").
+- Totals are computed by the app: subtotal = Σ qty × rate, minus discount %, plus tax %.
+- One A4 page; keep to roughly 10 line items or fewer.
+- Nothing is stored: no server, no localStorage, no cookies. The link stays in the address bar, so reloading it restores the invoice; edits made on the page are lost when the tab closes.

@@ -1,0 +1,159 @@
+@import "tailwindcss";
+@import "./palette.css";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@font-face {
+  font-family: "Soehne";
+  src: url("/fonts/soehne-buch.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Lava";
+  src: url("/fonts/lava-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: block;
+}
+
+:root {
+  --color-field: color-mix(in oklch, var(--color-tx) 5%, transparent);
+  --color-field-2: color-mix(in oklch, var(--color-tx) 9%, transparent);
+  --color-field-3: color-mix(in oklch, var(--color-tx) 14%, transparent);
+  --color-panel: var(--color-bg-2);
+  --color-stage: var(--color-bg);
+  --shadow-pop: 0 12px 32px -8px color-mix(in oklch, black 28%, transparent),
+    0 2px 6px color-mix(in oklch, black 10%, transparent);
+}
+
+.dark {
+  --color-stage: oklch(0.12 0.005 80);
+  --color-panel: var(--color-bg);
+  --shadow-pop: 0 16px 40px -8px color-mix(in oklch, black 60%, transparent),
+    0 0 0 1px color-mix(in oklch, white 6%, transparent);
+}
+
+@theme inline {
+  --font-sans: "Soehne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --color-bg: var(--color-bg);
+  --color-bg-2: var(--color-bg-2);
+  --color-ui: var(--color-ui);
+  --color-ui-2: var(--color-ui-2);
+  --color-ui-3: var(--color-ui-3);
+  --color-tx: var(--color-tx);
+  --color-tx-2: var(--color-tx-2);
+  --color-tx-3: var(--color-tx-3);
+  --color-tx-4: var(--color-tx-4);
+  --color-re: var(--color-re);
+  --color-or: var(--color-or);
+  --color-ye: var(--color-ye);
+  --color-gr: var(--color-gr);
+  --color-cy: var(--color-cy);
+  --color-bl: var(--color-bl);
+  --color-pu: var(--color-pu);
+  --color-ma: var(--color-ma);
+  --color-field: var(--color-field);
+  --color-field-2: var(--color-field-2);
+  --color-field-3: var(--color-field-3);
+  --color-panel: var(--color-panel);
+  --color-stage: var(--color-stage);
+  --shadow-pop: var(--shadow-pop);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-stage);
+  color: var(--color-tx);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  user-select: none;
+}
+
+input,
+textarea {
+  user-select: text;
+}
+
+:focus-visible {
+  outline: 2px solid color-mix(in oklch, var(--color-bl) 70%, transparent);
+  outline-offset: 1px;
+}
+
+.tabular {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 11.5px;
+}
+
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-field-3) transparent;
+}
+
+input[type="color"] {
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: inherit;
+}
+input[type="color"]::-moz-color-swatch {
+  border: none;
+  border-radius: inherit;
+}
+
+#agents {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+#print {
+  display: none;
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+  html,
+  body,
+  #root {
+    height: auto;
+    overflow: visible;
+    background: white;
+  }
+  #app,
+  #agents {
+    display: none !important;
+  }
+  #print {
+    display: block;
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://invoice.alexvoid.com/schema.json",
+  "title": "Invoice",
+  "description": "Setup for invoice.alexvoid.com. Pass as #json=<encodeURIComponent(JSON)>. All fields optional; omitted ones stay empty or default. Nothing is saved.",
+  "type": "object",
+  "$defs": {
+    "party": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "address": { "type": "string", "description": "One line per row, separated by \\n" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "taxId": { "type": "string" }
+      }
+    },
+    "item": {
+      "type": "object",
+      "properties": {
+        "description": { "type": "string" },
+        "qty": { "type": "number" },
+        "unit": { "type": "string", "examples": ["hours", "days", "pcs", "month"] },
+        "rate": { "type": "number", "description": "Price per unit" }
+      },
+      "required": ["description", "qty", "rate"]
+    }
+  },
+  "properties": {
+    "prefix": { "type": "string", "default": "INV" },
+    "number": { "type": "integer", "minimum": 0 },
+    "yearInId": { "type": "boolean", "default": true, "description": "INV-2026-21 vs INV-21" },
+    "date": { "type": "string", "format": "date", "description": "YYYY-MM-DD; empty = today" },
+    "terms": { "type": "integer", "minimum": 0, "default": 15, "description": "Days until due; 0 = due on receipt" },
+    "status": { "enum": ["pending", "paid", "draft"], "default": "pending" },
+    "from": { "$ref": "#/$defs/party", "description": "Sender" },
+    "to": { "$ref": "#/$defs/party", "description": "Client" },
+    "items": { "type": "array", "items": { "$ref": "#/$defs/item" }, "minItems": 1 },
+    "currency": { "type": "string", "pattern": "^[A-Z]{3}$", "default": "USD" },
+    "currencyDisplay": { "enum": ["code", "symbol"], "default": "code" },
+    "locale": { "type": "string", "default": "en-US" },
+    "taxLabel": { "type": "string", "default": "VAT", "description": "Empty hides the tax row" },
+    "taxRate": { "type": "number", "default": 0, "description": "Percent" },
+    "discount": { "type": "number", "minimum": 0, "maximum": 100, "default": 0, "description": "Percent, before tax" },
+    "notes": { "type": "string", "description": "Payment details under the table" },
+    "logoShape": { "enum": ["round", "square"] },
+    "signature": { "type": "boolean", "default": true }
+  }
+}
