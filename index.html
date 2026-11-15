@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Invoice</title>
     <meta name="description" content="Free, minimal invoice generator. No accounts, nothing is saved." />
+    <link rel="canonical" href="https://invoice.alexvoid.com/" />
+    <meta name="author" content="Alex Void" />
+    <link rel="author" href="https://alexvoid.com/" />
+    <meta property="og:title" content="Invoice" />
+    <meta property="og:description" content="Free, minimal invoice generator. No accounts, nothing is saved." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://invoice.alexvoid.com/" />
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Invoice", "url": "https://invoice.alexvoid.com/", "description": "Free, minimal invoice generator. No accounts, nothing is saved.", "applicationCategory": "BusinessApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@type": "Person", "name": "Alex Void", "url": "https://alexvoid.com/"}}</script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="alternate" type="text/markdown" href="/llms.txt" title="Instructions for AI agents" />
     <link rel="describedby" type="application/schema+json" href="/schema.json" />
@@ -19,6 +27,9 @@
       <p>Keys: from.name, from.address, from.email, from.phone, from.tax (tax ID); to.name, to.address, to.email, to.tax; item=description|qty|unit|rate (repeat per line); currency (ISO code); tax=LABEL:RATE (percent); discount (percent); terms (days, 0 = on receipt); date (YYYY-MM-DD); prefix; number; status (pending|paid|draft); notes (payment details); display (code|symbol); locale; signature (0 hides).</p>
       <p>Or #json=&lt;encodeURIComponent(JSON)&gt; matching https://invoice.alexvoid.com/schema.json. Full reference: https://invoice.alexvoid.com/llms.txt</p>
     </section>
+    <noscript>
+      <p>Invoice: Free, minimal invoice generator. No accounts, nothing is saved. Made by <a href="https://alexvoid.com/">Alex Void</a>. It needs JavaScript to run.</p>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
